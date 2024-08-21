@@ -22,7 +22,7 @@ const CreateUserPage = () => {
   })
 
   function createUser(values){
-    fetch("http://localhost:5555/api/users", {
+    fetch("/api/users", {
       method: "POST",
       headers: 
       {

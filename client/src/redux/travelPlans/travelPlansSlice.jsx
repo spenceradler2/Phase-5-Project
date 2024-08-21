@@ -11,7 +11,7 @@ const initialState = {
 export const fetchTravelPlans = createAsyncThunk(
   'travelPlans/fetchTravelPlans',
   async () => {
-    const response = await fetch("http://localhost:5555/api/travel_plans")
+    const response = await fetch("/api/travel_plans")
     if (!response.ok) {
       throw new Error('Failed to fetch travel plans')
     }
@@ -23,7 +23,7 @@ export const fetchTravelPlans = createAsyncThunk(
 export const fetchTravelPlansUserId = createAsyncThunk(
   'travelPlans/fetchTravelPlansUserId',
   async (userId) => {
-    const response = await fetch(`http://localhost:5555/api/user/${userId}`)
+    const response = await fetch(`/api/user/${userId}`)
     const data = await response.json()
     return data
   }
@@ -32,7 +32,7 @@ export const fetchTravelPlansUserId = createAsyncThunk(
 export const fetchTravelPlansLocationId = createAsyncThunk(
   'travelPlans/fetchTravelPlansLocationId',
   async (locationId) => {
-    const response = await fetch(`http://localhost:5555/api/location/${locationId}`)
+    const response = await fetch(`/api/location/${locationId}`)
     const data = await response.json()
     return data
   }
@@ -41,7 +41,7 @@ export const fetchTravelPlansLocationId = createAsyncThunk(
 export const addTravelPlan = createAsyncThunk(
   'travelPlans/addTravelPlan',
   async (newTravelPlan) => {
-    const response = await fetch("http://localhost:5555/api/travel_plans", {
+    const response = await fetch("/api/travel_plans", {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify(newTravelPlan)
@@ -56,7 +56,7 @@ export const addTravelPlan = createAsyncThunk(
 export const deleteTravelPlan = createAsyncThunk(
   'travelPlans/deleteTravelPlan',
   async (id) => {
-    const response = await fetch(`http://localhost:5555/api/travel_plans/${id}`, {
+    const response = await fetch(`/api/travel_plans/${id}`, {
       method: 'DELETE'
     })
     if (!response.ok) {
@@ -69,7 +69,7 @@ export const deleteTravelPlan = createAsyncThunk(
 export const updateTravelPlan = createAsyncThunk(
     'travelPlans/updateTravelPlan',
     async ({id,values}) => {
-      const response = await fetch(`http://localhost:5555/api/travel_plans/${id}`, {
+      const response = await fetch(`/api/travel_plans/${id}`, {
         method: 'PATCH',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(values)

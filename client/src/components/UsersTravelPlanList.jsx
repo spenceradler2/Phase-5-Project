@@ -11,7 +11,7 @@ const UsersTravelPlanList = () => {
     const dispatch = useDispatch()
 
     useEffect(() => {
-        fetch("http://localhost:5555/api/users")
+        fetch("/api/users")
             .then((resp) => resp.json())
             .then(data => setUsers(data))
     }, []);

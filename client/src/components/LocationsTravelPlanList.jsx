@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { fetchTravelPlansLocationId } from '../redux/travelPlans/travelPlansSlice'
-import { Card, CardContent, CardActions, Typography, Box, Grid, Select, MenuItem, FormControl, InputLabel } from '@mui/material'
+import { Card, CardContent, Typography, Box, Grid, Select, MenuItem, FormControl, InputLabel } from '@mui/material'
 
 const LocationsTravelPlanList = () => {
     const travelPlansLocationId = useSelector((state) => state.travelPlans.travelPlansLocationId)
@@ -10,7 +10,7 @@ const LocationsTravelPlanList = () => {
     const dispatch = useDispatch()
 
     useEffect(() => {
-        fetch("http://localhost:5555/api/locations")
+        fetch("/api/locations")
             .then((resp) => resp.json())
             .then(data => setLocations(data))
     }, [])
@@ -118,4 +118,4 @@ const LocationsTravelPlanList = () => {
     )
 }
 
-export default LocationsTravelPlanList;
+export default LocationsTravelPlanList
