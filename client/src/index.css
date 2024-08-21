@@ -13,13 +13,18 @@ html,body{
 }
 .userTravelPlanDiv{
   text-align: center;
+  padding-top: 90px; 
+
 }
 
 .locationTravelPlanDiv{
   text-align: center;
+  padding-top: 90px; 
+
 } 
 .createUserDiv{
   text-align: center;
+  padding-top: 130px; 
 }
 /* .Form{
   text-align: center;

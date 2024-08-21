@@ -1,7 +1,6 @@
-// TravelPlanCard.js
-import React from 'react';
-import { Card, CardContent, CardActions, Button, Typography, Box } from '@mui/material';
-import { Link } from 'react-router-dom';
+import React from 'react'
+import { Card, CardContent, CardActions, Button, Typography, Box } from '@mui/material'
+import { Link } from 'react-router-dom'
 
 const TravelPlanCard = ({ travelPlan, deleteTravelPlan }) => {
   return (
@@ -50,7 +49,7 @@ const TravelPlanCard = ({ travelPlan, deleteTravelPlan }) => {
         <Button size="small" component={Link} to={`/travel_plans/${travelPlan.id}/edit`}>Update Travel Plan</Button>
       </CardActions>
     </Card>
-  );
-};
+  )
+}
 
-export default TravelPlanCard;
+export default TravelPlanCard

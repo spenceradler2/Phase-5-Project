@@ -1,13 +1,13 @@
-import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom"
 
 import Navbar from "./Navbar"
 import Home from "./Home"
 import TravelPlanList from "./components/TravelPlanList"
 import TravelPlanForm from "./components/TravelPlanForm"
-import EditTravelPlanForm from "./components/EditTravelPlanForm";
-import UsersTravelPlanList from "./components/UsersTravelPlanList";
-import LocationsTravelPlanList from "./components/LocationsTravelPlanList";
-import CreateUserPage from "./components/CreateUserPage";
+import EditTravelPlanForm from "./components/EditTravelPlanForm"
+import UsersTravelPlanList from "./components/UsersTravelPlanList"
+import LocationsTravelPlanList from "./components/LocationsTravelPlanList"
+import CreateUserPage from "./components/CreateUserPage"
 
 function App() {
 

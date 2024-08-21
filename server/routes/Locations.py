@@ -1,5 +1,4 @@
 from config import api, app 
-
 from flask_restful import Resource
 from models.location import Location
 
