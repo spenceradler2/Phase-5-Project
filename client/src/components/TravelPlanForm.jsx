@@ -33,7 +33,7 @@ const TravelPlanForm = () => {
 
   useEffect(() => {
     const loadUsers = async () => {
-        const response = await fetch("http://localhost:5555/api/users")
+        const response = await fetch("/api/users")
         const data = await response.json()
         setUsers(data)
     }
@@ -41,6 +41,7 @@ const TravelPlanForm = () => {
   }, [])
 
   return (
+    <div className='Form'>
     <Box sx={{ padding: 3 }}>
       <Typography variant="h4" gutterBottom>
         Add a Travel Plan
@@ -59,7 +60,7 @@ const TravelPlanForm = () => {
           <Form>
             <Box sx={{ mb: 1 }}>
               <TextField
-                style = {{width: 900}}
+                style = {{width: 300}}
                 label="Name of Travel Plan"
                 name="name"
                 variant="outlined"
@@ -73,7 +74,7 @@ const TravelPlanForm = () => {
 
             <Box sx={{ mb: 1 }}>
               <TextField
-                style = {{width: 900}}
+                style = {{width: 300}}
                 label="Google Maps iframe source or link"
                 name="iframe_src_or_link"
                 variant="outlined"
@@ -93,7 +94,7 @@ const TravelPlanForm = () => {
 
             <Box sx={{ mb: 1 }}>
               <TextField
-                style = {{width: 900}}
+                style = {{width: 300}}
                 type="date"
                 label="Start Date"
                 name="start_date"
@@ -109,7 +110,7 @@ const TravelPlanForm = () => {
 
             <Box sx={{ mb: 1 }}>
               <TextField
-                style = {{width: 900}}
+                style = {{width: 300}}
                 type="date"
                 label="End Date"
                 name="end_date"
@@ -125,7 +126,7 @@ const TravelPlanForm = () => {
 
             <Box sx={{ mb: 1 }}>
               <TextField
-                style = {{width: 900}}
+                style = {{width: 300}}
                 label="Location"
                 name="location_name"
                 variant="outlined"
@@ -135,7 +136,8 @@ const TravelPlanForm = () => {
                 helperText={<ErrorMessage name="location_name" />}
                 error={touched.location_name && Boolean(errors.location_name)}
               />
-              <Typography variant="body2" color="textSecondary" sx={{ mt: 1 }}>
+              <Typography variant="body2" color="textSecondary" sx={{ mt: 1 }}                 style = {{width: 300}}
+              >
                 Location input format to be City, State or City, Country. Case matters. Example: New York, New York or East Hampton, New York or Madrid, Spain.
               </Typography>
             </Box>
@@ -153,7 +155,7 @@ const TravelPlanForm = () => {
                         <FormControl  variant="outlined">
                           <InputLabel>Select a user</InputLabel>
                           <Field
-                            style = {{width: 900}}
+                            style = {{width: 200}}
                             inputStyle = {{textAlign: 'center'}}
                             as={Select}
                             label="Select a user"
@@ -205,10 +207,11 @@ const TravelPlanForm = () => {
             </Button>
 
             <Box sx={{ mt: 4 }}>
-              <Typography variant="h6" gutterBottom>
+              <Typography variant="h6" gutterBottom style = {{width: 300}}
+              >
                 How to add the iframe:
-              </Typography>
-              <ol>
+              </Typography > 
+              <ol style = {{width: 300}} >
                 <li>Once your map is created make sure all items under share are checked.</li>
                 <li>Go to the same card and click on the 3 dots in the top right corner.</li>
                 <li>Go to "Embed on my site".</li>
@@ -220,6 +223,7 @@ const TravelPlanForm = () => {
         )}
       </Formik>
     </Box>
+    </div>
   )
 }
 

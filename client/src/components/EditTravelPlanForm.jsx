@@ -1,17 +1,17 @@
-import React from 'react';
-import { useParams, useNavigate } from 'react-router-dom';
-import { useFormik } from 'formik';
-import * as yup from 'yup';
-import { useSelector, useDispatch } from 'react-redux';
-import { updateTravelPlan } from '../redux/travelPlans/travelPlansSlice';
-import { Box, Typography, TextField, Button, Link } from '@mui/material';
+import React from 'react'
+import { useParams, useNavigate } from 'react-router-dom'
+import { useFormik } from 'formik'
+import * as yup from 'yup'
+import { useSelector, useDispatch } from 'react-redux'
+import { updateTravelPlan } from '../redux/travelPlans/travelPlansSlice'
+import { Box, Typography, TextField, Button, Link } from '@mui/material'
 
 const EditTravelPlanForm = () => {
-  const travelPlans = useSelector((state) => state.travelPlans.travelPlans);
-  const { id } = useParams();
-  const travelPlan = travelPlans.find((plan) => plan.id === parseInt(id));
-  const navigate = useNavigate();
-  const dispatch = useDispatch();
+  const travelPlans = useSelector((state) => state.travelPlans.travelPlans)
+  const { id } = useParams()
+  const travelPlan = travelPlans.find((plan) => plan.id === parseInt(id))
+  const navigate = useNavigate()
+  const dispatch = useDispatch()
 
   const initialValues = {
     name: travelPlan.name,
@@ -25,7 +25,7 @@ const EditTravelPlanForm = () => {
     iframe_src_or_link: yup.string().required('Provide a link to the map.'),
     start_date: yup.date().required('Start date is required.'),
     end_date: yup.date().required('End date is required.'),
-  });
+  })
 
   const formik = useFormik({
     initialValues,
@@ -35,7 +35,7 @@ const EditTravelPlanForm = () => {
       await dispatch(updateTravelPlan({ id: parseInt(id), values }));
       navigate('/travel_plans');
     },
-  });
+  })
 
   return (
     <Box sx={{ padding: 3 }}>
@@ -46,7 +46,7 @@ const EditTravelPlanForm = () => {
         <Box sx={{ mb: 3 }}>
           <TextField
             // fullWidth
-            style = {{width: 900}}
+            style = {{width: 300}}
             label="Name of Travel Plan"
             variant="outlined"
             name="name"
@@ -60,8 +60,7 @@ const EditTravelPlanForm = () => {
 
         <Box sx={{ mb: 3 }}>
           <TextField
-            // fullWidth
-            style = {{width: 900}}
+            style = {{width: 300}}
             label="Provide iframe source or link to Google Maps map"
             variant="outlined"
             name="iframe_src_or_link"
@@ -83,8 +82,7 @@ const EditTravelPlanForm = () => {
 
         <Box sx={{ mb: 3 }}>
           <TextField
-            // fullWidth
-            style = {{width: 900}}
+            style = {{width: 300}}
             label="Start Date"
             variant="outlined"
             type="date"
@@ -100,8 +98,7 @@ const EditTravelPlanForm = () => {
 
         <Box sx={{ mb: 3 }}>
           <TextField
-            // fullWidth
-            style = {{width: 900}}
+            style = {{width: 300}}
             label="End Date"
             variant="outlined"
             type="date"
@@ -121,7 +118,7 @@ const EditTravelPlanForm = () => {
 
         <Box sx={{ mt: 4 }}>
           <Typography variant="h6">How to add the iframe:</Typography>
-          <ol>
+          <ol style = {{width: 300}}>
             <li>Once your map is created make sure all items under share are checked.</li>
             <li>Go to the same card and click on the 3 dots in the top right corner.</li>
             <li>Go to "Embed on my site."</li>
@@ -131,7 +128,7 @@ const EditTravelPlanForm = () => {
         </Box>
       </form>
     </Box>
-  );
-};
+  )
+}
 
-export default EditTravelPlanForm;
+export default EditTravelPlanForm

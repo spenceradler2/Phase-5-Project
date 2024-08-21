@@ -12,6 +12,5 @@ from routes.Locations import *
 def not_found(e):
     return render_template("index.html")
 
-
 if __name__ == "__main__":
   app.run(port=5555, debug=True)

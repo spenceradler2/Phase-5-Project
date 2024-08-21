@@ -35,12 +35,11 @@ const Home = () => {
         
         <Slide direction="right" in={true} mountOnEnter unmountOnExit timeout={1600}>
           <Box sx={{ marginY: 1 }}>
-            <ul style={{ textAlign: 'left', listStyleType: 'disc', margin: '0 auto', padding: 0, maxWidth: 600 }}>
+            <ul style={{ textAlign: 'left', listStyleType: 'disc', margin: '5', padding: 5, maxWidth: 600 }}>
               <li>You can see a list of all the travel plans, who is going there and where they are going.</li>
               <li>You can delete, update, and add a new travel plan to the website.</li>
               <li>You can see all the travel plans that one of your friends has.</li>
               <li>You can see all the travel plans for specific location.</li>
-
             </ul>
           </Box>
         </Slide>

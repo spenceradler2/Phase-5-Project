@@ -38,7 +38,9 @@ const LocationsTravelPlanList = () => {
                 <Select
                     value={selectedLocation || ''}
                     onChange={handleLocationChange}
-                    displayEmpty
+                    label="Select a location"
+                    style = {{width: 300}}
+
                 >
                     <MenuItem value="" disabled>Select a location</MenuItem>
                     {locations.map(location => (

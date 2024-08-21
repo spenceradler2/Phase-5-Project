@@ -33,15 +33,17 @@ const UsersTravelPlanList = () => {
                 <Typography variant="h4" gutterBottom>
                     Show the Travel Plans of one of the users below:
                 </Typography>
-                <FormControl sx={{ mb: 3 }}>
+                <FormControl sx={{ mb: 3 }} variant="outlined">
                     <InputLabel>Select a user</InputLabel>
                     <Select
                         value={selectedUser || ''}
                         onChange={handleUserChange}
-                        displayEmpty
+                        margin="normal"
+                        label="Select a user"
                         inputProps={{ 'aria-label': 'Select a user' }}
+                        style = {{width: 300}}
                     >
-                        <MenuItem value="" disabled>Select a user</MenuItem>
+                        <MenuItem value="" >Select a user</MenuItem>
                         {users.map(user => (
                             <MenuItem key={user.id} value={user.id}>
                                 {user.name}: {user.username}

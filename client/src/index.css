@@ -1,5 +1,5 @@
 .main-content {
-  padding-top: 230px; 
+  padding-top: 80px; 
   height: 100%;
 }
 html,body{
@@ -21,3 +21,6 @@ html,body{
 .createUserDiv{
   text-align: center;
 }
+/* .Form{
+  text-align: center;
+} */

@@ -8,15 +8,17 @@ from datetime import date
 if __name__ == "__main__":
   with app.app_context():
     print("Starting seeding")
-    print('Deleting users...')
-    User.query.delete()
-    print('Deleting locations...')
-    Location.query.delete()
-    print('Deleting travel plans...')
-    TravelPlan.query.delete()
     print('Deleting travel plan users...')
     db.session.execute(text('DELETE FROM travel_plans_users'))
     db.session.commit()
+    print('Deleting users...')
+    User.query.delete()
+    print('Deleting travel plans...')
+    TravelPlan.query.delete()
+    print('Deleting locations...')
+    Location.query.delete()
+
+
 
     print('Creating users...')
     user_1 = User(name="Spencer Adler", username="spenceradler2", password = "test")
