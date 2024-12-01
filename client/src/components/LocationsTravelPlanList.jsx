@@ -4,27 +4,32 @@ import { fetchTravelPlansLocationId } from '../redux/travelPlans/travelPlansSlic
 import { Card, CardContent, Typography, Box, Grid, Select, MenuItem, FormControl, InputLabel } from '@mui/material'
 
 const LocationsTravelPlanList = () => {
+    // Getting travel plans based on a location id.
     const travelPlansLocationId = useSelector((state) => state.travelPlans.travelPlansLocationId)
+    // Created local state for location and selected location. 
     const [locations, setLocations] = useState([])
     const [selectedLocation, setSelectedLocation] = useState(null)
     const dispatch = useDispatch()
-
+    // Fetch all the locations.
     useEffect(() => {
         fetch("/api/locations")
             .then((resp) => resp.json())
             .then(data => setLocations(data))
     }, [])
-
+    // Fetching travel plans for a selected location. 
     useEffect(() => {
         if (selectedLocation) {
             dispatch(fetchTravelPlansLocationId(selectedLocation))
         }
     }, [selectedLocation, dispatch]);
-
+    // When a new location is selected updating state for that location. 
     const handleLocationChange = (event) => {
         const locationId = parseInt(event.target.value)
         setSelectedLocation(locationId || null)
-    };
+    }
+    // Sorting the travel plans for that location so that the latest travel plans appear first. 
+    const sortedTravelPlans = travelPlansLocationId.travel_plans ? [...travelPlansLocationId.travel_plans].sort((a, b) => new Date(b.start_date) - new Date(a.start_date))
+    : []
 
     return (
         <Box sx={{ padding: 3 }}>
@@ -51,14 +56,15 @@ const LocationsTravelPlanList = () => {
                 </Select>
             </FormControl>
             </div>
+            {/* Conitionally rendering the travel plans a selected location. If nothing is selected, giving directions to select a location. Once a location is selected showing the travel plans for that location. If a location is selected with no travel plans provide text saying that there is no travel plans for that location.  */}
             {selectedLocation ? (
                 <Box>
                     <Typography variant="h5" gutterBottom>
                         Travel Plans for {locations.find(location => location.id === selectedLocation)?.name}
                     </Typography>
-                    {travelPlansLocationId.travel_plans && travelPlansLocationId.travel_plans.length > 0 ? (
+                    {sortedTravelPlans && sortedTravelPlans.length > 0 ? (
                     <Grid container spacing={3}>
-                        {travelPlansLocationId.travel_plans?.map((travelPlanLocationId) => (
+                        {sortedTravelPlans.map((travelPlanLocationId) => (
                             <Grid item xs={12} sm={6} md={4} key={travelPlanLocationId.id}>
                                 <Card sx={{ maxWidth: 600, mb: 3, borderRadius: 2, boxShadow: 3 }}>
                                     <CardContent>
@@ -88,7 +94,6 @@ const LocationsTravelPlanList = () => {
                                         <Typography variant="body1" color="textSecondary">
                                             <strong>End Date:</strong> {travelPlanLocationId.end_date}
                                         </Typography>
-                                        {/* Display users */}
                                         <Box sx={{ mt: 2 }}>
                                             <Typography variant="body1" color="textSecondary"><strong>Travelers:</strong></Typography>
                                             {travelPlanLocationId.users?.map((user, index) => (

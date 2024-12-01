@@ -11,7 +11,7 @@ class User(db.Model, SerializerMixin):
     id = db.Column(db.Integer, primary_key=True)
     name = db.Column(db.String) 
     username = db.Column(db.String, unique=True)
-    password = db.Column(db.String) #Add contraint for viewing review lecture. 
+    password = db.Column(db.String) #To be used when authentication is added.
 
     travel_plans = db.relationship('TravelPlan', secondary=travel_plan_users, back_populates= 'users')
 

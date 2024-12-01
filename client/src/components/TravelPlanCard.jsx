@@ -11,6 +11,7 @@ const TravelPlanCard = ({ travelPlan, deleteTravelPlan }) => {
         </Typography>
 
         <Box sx={{ mb: 2 }}>
+          {/* Logic to show either the iframe link or a google maps depending what the travel plan contains. */}
           {travelPlan.iframe_src_or_link.includes('google.com') ? (
             <iframe
               src={travelPlan.iframe_src_or_link}
@@ -36,6 +37,7 @@ const TravelPlanCard = ({ travelPlan, deleteTravelPlan }) => {
           <strong>End Date:</strong> {travelPlan.end_date}
         </Typography>
         <Box sx={{ mt: 2 }}>
+          {/* Displays the travelers or traveler for that travel plan */}
           <Typography variant="body1" color="textSecondary"><strong>Traveler(s):</strong></Typography>
           {travelPlan.users?.map((user, index) => (
               <Typography key={index} variant="body2" color="textSecondary">

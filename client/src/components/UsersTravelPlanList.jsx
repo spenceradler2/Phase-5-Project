@@ -4,28 +4,38 @@ import { fetchTravelPlansUserId } from '../redux/travelPlans/travelPlansSlice'
 import { Card, CardContent, Typography, Box, Grid, Select, MenuItem, FormControl, InputLabel } from '@mui/material'
 
 const UsersTravelPlanList = () => {
+    // Getting travel plans based on a user id.
+
     const travelPlansUserId = useSelector((state) => state.travelPlans.travelPlansUserId)
+    // Created local state for users and selected user. 
 
     const [users, setUsers] = useState([])
     const [selectedUser, setSelectedUser] = useState(null)
     const dispatch = useDispatch()
+    // Fetch all the users.
 
     useEffect(() => {
         fetch("/api/users")
             .then((resp) => resp.json())
             .then(data => setUsers(data))
     }, []);
+    // Fetching travel plans for a selected user. 
 
     useEffect(() => {
         if (selectedUser) {
             dispatch(fetchTravelPlansUserId(selectedUser))
         }
     }, [selectedUser, dispatch]);
+    // When a new user is selected updating state for that user. 
 
     const handleUserChange = (event) => {
         const userId = parseInt(event.target.value)
         setSelectedUser(userId || null)
     };
+    // Sorting the travel plans for that user so that the latest travel plans appear first. 
+
+    const sortedTravelPlans = travelPlansUserId.travel_plans ? [...travelPlansUserId.travel_plans].sort((a, b) => new Date(b.start_date) - new Date(a.start_date))
+    : []
 
     return (
         <Box sx={{ padding: 3 }}>
@@ -52,14 +62,16 @@ const UsersTravelPlanList = () => {
                     </Select>
                 </FormControl>
             </div>
+            {/* Conitionally rendering the travel plans a selected user. If nothing is selected, giving directions to select a user. Once a user is selected showing the travel plans for that user. If a user is selected with no travel plans provide text saying that there is no travel plans for that user.  */}
+
             {selectedUser ? (
                 <Box>
                     <Typography variant="h5" gutterBottom>
                         Travel Plans for {users.find(user => user.id === selectedUser)?.name}
                     </Typography>
-                    {travelPlansUserId.travel_plans && travelPlansUserId.travel_plans.length > 0 ? (
+                    {sortedTravelPlans && sortedTravelPlans.length > 0 ? (
                         <Grid container spacing={3}>
-                            {travelPlansUserId.travel_plans.map((travelPlanUserId) => (
+                            {sortedTravelPlans.map((travelPlanUserId) => (
                                 <Grid item xs={12} sm={6} md={4} key={travelPlanUserId.id}>
                                     <Card sx={{ maxWidth: 600, mb: 3, borderRadius: 2, boxShadow: 3 }}>
                                         <CardContent>
@@ -91,14 +103,6 @@ const UsersTravelPlanList = () => {
                                             <Typography variant="body1" color="textSecondary">
                                                 <strong>End Date:</strong> {travelPlanUserId.end_date}
                                             </Typography>
-                                            {/* <Typography variant="body1" color="textSecondary">
-                                                <strong>Traveler(s):</strong>
-                                            </Typography>
-                                            {travelPlanUserId.users?.map((user, index) => (
-                                                <Typography key={index} variant="body2" color="textSecondary">
-                                                    {user.name} ({user.username})
-                                                </Typography>
-                                            ))} */}
                                         </CardContent>
                                     </Card>
                                 </Grid>

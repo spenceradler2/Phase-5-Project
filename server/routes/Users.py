@@ -15,10 +15,12 @@ class UsersResource(Resource):
       data = request.get_json()
       name = data.get("name")
       username = data.get("username")
+      # To be uncommented when authentication is added.
       # password = data.get("password")
       try:
         user = User(name=name,
                   username=username,
+                  # To be uncommented when authentication is added.
                   # password=password
                   ) 
         db.session.add(user)

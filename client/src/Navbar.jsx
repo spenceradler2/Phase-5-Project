@@ -1,7 +1,7 @@
-import React, { useState } from 'react';
-import { AppBar, Toolbar, Typography, IconButton, Menu, MenuItem } from '@mui/material';
-import { Link } from 'react-router-dom';
-import MenuIcon from '@mui/icons-material/Menu';
+import React, { useState } from 'react'
+import { AppBar, Toolbar, Typography, IconButton, Menu, MenuItem } from '@mui/material'
+import { Link } from 'react-router-dom'
+import MenuIcon from '@mui/icons-material/Menu'
 
 const styles = {
   appBar: {
@@ -9,6 +9,7 @@ const styles = {
     top: 0,
     width: '100%',
     marginBottom: 20,
+    backgroundColor: 'skyblue',    
   },
   title: {
     flexGrow: 1,
@@ -21,33 +22,41 @@ const styles = {
   },
   menu: {
     maxHeight: 400,
-    width: '45ch',
     backgroundColor: 'lightblue',
     color: 'blue',
-    fontFamily: 'fantasy',
+    borderRadius: '8px',
+    boxShadow: '0px 4px 12px rgba(0, 0, 0, 0.1)', 
   },
   menuItem: {
-    fontSize: '0.9rem',  // Adjust the font size here
+    fontSize: '0.9rem',
+    padding: '10px 20px', 
   },
-};
+  menuItemWithDivider: {
+    fontSize: '0.9rem',
+    padding: '10px 20px',
+    borderBottom: '1px solid black',
+  },
+}
 
 const Navbar = () => {
-  const [anchorEl, setAnchorEl] = useState(null);
-  const open = Boolean(anchorEl);
-
+  // State to control the open/close state of the menu.
+  const [anchorEl, setAnchorEl] = useState(null)
+  const open = Boolean(anchorEl)
+  // Sets the anchor point for the menu (where the menu will open from).
   const handleClick = (event) => {
-    setAnchorEl(event.currentTarget);
-  };
-
+    setAnchorEl(event.currentTarget)
+  }
+  // Closes the menu when the user clicks outside or selects a menu item.
   const handleClose = () => {
-    setAnchorEl(null);
-  };
+    setAnchorEl(null)
+  }
 
   return (
     <AppBar style={styles.appBar}>
       <Toolbar>
+        {/* Title of the webpage in the top left. */}
         <Typography variant="h4" style={styles.title}>
-          TravelPlan
+          TravelPlan 🌍
         </Typography>
         <IconButton
           edge="end"
@@ -64,19 +73,20 @@ const Navbar = () => {
           onClose={handleClose}
           PaperProps={{ style: styles.menu }}
         >
-          <MenuItem component={Link} to="/" onClick={handleClose} style={styles.menuItem}>
+          {/* Navigation buttons to select from.  */}
+          <MenuItem component={Link} to="/" onClick={handleClose} style={styles.menuItemWithDivider}>
             WELCOME PAGE
           </MenuItem>
-          <MenuItem component={Link} to="/create_traveler" onClick={handleClose} style={styles.menuItem}>
+          <MenuItem component={Link} to="/create_traveler" onClick={handleClose} style={styles.menuItemWithDivider}>
             CREATE TRAVELER
           </MenuItem>
-          <MenuItem component={Link} to="/travel_plans" onClick={handleClose} style={styles.menuItem}>
+          <MenuItem component={Link} to="/travel_plans" onClick={handleClose} style={styles.menuItemWithDivider}>
             SHOW ALL TRAVEL PLANS
           </MenuItem>
-          <MenuItem component={Link} to="/travel_plans/new" onClick={handleClose} style={styles.menuItem}>
+          <MenuItem component={Link} to="/travel_plans/new" onClick={handleClose} style={styles.menuItemWithDivider}>
             ADD A TRAVEL PLAN
           </MenuItem>
-          <MenuItem component={Link} to="/users_travel_plans" onClick={handleClose} style={styles.menuItem}>
+          <MenuItem component={Link} to="/users_travel_plans" onClick={handleClose} style={styles.menuItemWithDivider}>
             SHOW THE TRAVEL PLANS OF A TRAVELER
           </MenuItem>
           <MenuItem component={Link} to="/locations_travel_plans" onClick={handleClose} style={styles.menuItem}>
@@ -85,7 +95,7 @@ const Navbar = () => {
         </Menu>
       </Toolbar>
     </AppBar>
-  );
-};
+  )
+}
 
-export default Navbar;
+export default Navbar

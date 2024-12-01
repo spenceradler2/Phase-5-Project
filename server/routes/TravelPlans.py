@@ -23,6 +23,7 @@ class TravelPlansResource(Resource):
       end_date_date_obj = datetime.strptime(end_date, '%Y-%m-%d')
       location_name = data.get("location_name")
       array_of_users_usernames = data.get("array_of_users_usernames")  
+      # Check if the location already exists in the database
       if Location.query.filter_by(name=location_name).first():
         location = Location.query.filter_by(name=location_name).first()
         location_id = location.id
@@ -31,8 +32,10 @@ class TravelPlansResource(Resource):
         db.session.add(location)
         db.session.commit()
         location_id = location.id
+      # Retrieve the User objects for the given list of usernames
       users = [User.query.filter_by(username=username).first() for username in array_of_users_usernames]
-
+      
+      # Check if any users do not exist
       if None in users:
         return {"message": "One of these users does not exist."}, 422
       else:
@@ -60,8 +63,10 @@ class TravelPlanResource(Resource):
     data = request.get_json()
     travel_plan = TravelPlan.query.get(id)
     try:
+      # Loop through the provided fields and update the travel plan accordingly.
       for key, value in data.items():
         if hasattr(travel_plan, key):
+          # If updating dates, convert the string to a datetime object
           if key=="start_date" or key=="end_date":
               start_or_end_date_date_obj = datetime.strptime(value, '%Y-%m-%d')    
               setattr(travel_plan, key, start_or_end_date_date_obj)
