@@ -42,13 +42,13 @@ const Home = () => {
               variant="h2"
               color="primary"
               sx={{
-                textShadow: '.5px .5px 0px black, -.5px -.5px 0px black, .5px -.5px 0px black, -.5px .5px 0px black',
+                textShadow: '.5px .5px 5px black, -.5px -.5px 0px black, .5px -.5px 0px black, -.5px .5px 0px black',
                 paddingLeft: { xs: '0', sm: '90px' },
                 fontSize: { xs: '1.7rem', sm: '2.3rem', md: '3rem' },
               }}
               gutterBottom
             >
-              Welcome to TravelPlan!
+              <strong>Welcome to TravelPlan!</strong>
             </Typography>
           </Grow>
 
@@ -110,7 +110,7 @@ const Home = () => {
           </Slide>
 
           {/* Feature cards animation */}
-          <Box sx={{ marginY: 2, display: 'flex', flexDirection: 'column', alignItems: 'center', width: '100%', paddingLeft: { xs: '0', sm: '90px' } }}> 
+          <Box sx={{ marginY: 2, display: 'flex', flexDirection: 'column', alignItems: 'center', width: '100%', paddingLeft: { xs: '0', sm: '50px' } }}> 
             {/* First Feature Card */}
             <Slide direction="right" in={true} mountOnEnter unmountOnExit timeout={1600}>
               <FeatureCard sx={{ marginX: { xs: '10px', sm: '15px' } }}>
@@ -119,15 +119,8 @@ const Home = () => {
                   color="textPrimary"
                   sx={{ fontSize: { xs: '.9rem', sm: '1.1rem' } }}
                 >
-                  Feature 1
-                </Typography>
-                <Typography
-                  variant="body2"
-                  color="textSecondary"
-                  sx={{ fontSize: { xs: '0.7rem', sm: '.9rem' } }}
-                >
-                  You can see a list of all the travel plans, who is going there, and where they are going.
-                </Typography>
+                  See a list of all the travel plans, who is going there, and where they are going.
+                  </Typography>        
               </FeatureCard>
             </Slide>
 
@@ -139,15 +132,9 @@ const Home = () => {
                   color="textPrimary"
                   sx={{ fontSize: { xs: '.9rem', sm: '1.1rem' } }}
                 >
-                  Feature 2
+                  Delete, update, and add a new travel plan.   
                 </Typography>
-                <Typography
-                  variant="body2"
-                  color="textSecondary"
-                  sx={{ fontSize: { xs: '0.7rem', sm: '.9rem' } }}
-                >
-                  You can delete, update, and add a new travel plan to the website.
-                </Typography>
+                
               </FeatureCard>
             </Slide>
 
@@ -159,15 +146,9 @@ const Home = () => {
                   color="textPrimary"
                   sx={{ fontSize: { xs: '.9rem', sm: '1.1rem' } }}
                 >
-                  Feature 3
+                  See all the travel plans that one of your friends has.
                 </Typography>
-                <Typography
-                  variant="body2"
-                  color="textSecondary"
-                  sx={{ fontSize: { xs: '0.7rem', sm: '.9rem' } }}
-                >
-                  You can see all the travel plans that one of your friends has.
-                </Typography>
+                
               </FeatureCard>
             </Slide>
 
@@ -179,15 +160,9 @@ const Home = () => {
                   color="textPrimary"
                   sx={{ fontSize: { xs: '.9rem', sm: '1.1rem' } }}
                 >
-                  Feature 4
+                  See all the travel plans for a specific location.
                 </Typography>
-                <Typography
-                  variant="body2"
-                  color="textSecondary"
-                  sx={{ fontSize: { xs: '0.7rem', sm: '.9rem' } }}
-                >
-                  You can see all the travel plans for a specific location.
-                </Typography>
+                
               </FeatureCard>
             </Slide>
           </Box>

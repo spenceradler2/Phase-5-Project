@@ -1,5 +1,6 @@
 {
   "dependencies": {
+    "@react-google-maps/api": "^2.20.3",
     "@reduxjs/toolkit": "^2.2.7",
     "react-redux": "^9.1.2"
   }

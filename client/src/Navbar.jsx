@@ -10,15 +10,25 @@ const styles = {
     width: '100%',
     marginBottom: 20,
     backgroundColor: 'skyblue',    
+    display:"flex",
   },
   title: {
-    flexGrow: 1,
     fontWeight: 'bold',
     fontSize: '1.2rem',
     marginRight: 20,
+    textDecoration: 'none', 
+    color: 'inherit',  
+    display: 'inline-flex',  
+    alignItems: 'center', 
+    textShadow: '.5px .5px 5px black, -.5px -.5px 0px black, .5px -.5px 0px black, -.5px .5px 0px black', 
+    '&:hover': {
+      textDecoration: 'none', 
+      color: 'inherit',       
+    }
   },
   menuButton: {
     marginLeft: 'auto',
+    
   },
   menu: {
     maxHeight: 400,
@@ -51,11 +61,15 @@ const Navbar = () => {
     setAnchorEl(null)
   }
 
+  // const handleClick = () => {
+  //   setAnchorEl(null)
+  // }
+
   return (
     <AppBar style={styles.appBar}>
       <Toolbar>
         {/* Title of the webpage in the top left. */}
-        <Typography variant="h4" style={styles.title}>
+        <Typography component={Link}  to="/" variant="h4" style={styles.title}>
           TravelPlan 🌍
         </Typography>
         <IconButton

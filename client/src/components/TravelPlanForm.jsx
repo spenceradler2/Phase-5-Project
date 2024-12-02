@@ -30,7 +30,7 @@ const FeatureCard = styled(Box)({
   width: '100%',
   marginBottom: '15px',
   '&:hover': {
-    transform: 'scale(1.05)',
+    transform: 'scale(1.02)',
     transition: 'transform 0.3s ease-in-out',
   },
 })
@@ -175,7 +175,7 @@ const TravelPlanForm = () => {
               <Box sx={{ mb: 3 }}>
                 <TextField
                   fullWidth
-                  label="Location"
+                  label="Location (See below for details)"
                   name="location_name"
                   variant="outlined"
                   value={values.location_name}
@@ -184,7 +184,11 @@ const TravelPlanForm = () => {
                   helperText={<ErrorMessage name="location_name" />}
                   error={touched.location_name && Boolean(errors.location_name)}
                 />
+                <Typography variant="body2" color="textSecondary" sx={{ mt: 1 }}>
+                Location input format to be <strong>City, State </strong> or <strong>City, Country</strong>. <strong>Case matters </strong>. Example: New York, New York or East Hampton, New York or Madrid, Spain.
+                </Typography>
               </Box>
+
 
               <Box sx={{ mb: 3 }}>
                 <Typography variant="h6" gutterBottom>
