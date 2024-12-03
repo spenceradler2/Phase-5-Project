@@ -95,7 +95,9 @@ const LocationsTravelPlanList = () => {
                                             <strong>End Date:</strong> {travelPlanLocationId.end_date}
                                         </Typography>
                                         <Box sx={{ mt: 2 }}>
-                                            <Typography variant="body1" color="textSecondary"><strong>Travelers:</strong></Typography>
+                                            <Typography variant="body1" color="textSecondary">
+                                            <strong>{travelPlanLocationId.users?.length === 1 ? 'Traveler' : 'Travelers'}:</strong>
+                                            </Typography>
                                             {travelPlanLocationId.users?.map((user, index) => (
                                                 <Typography key={index} variant="body2" color="textSecondary">
                                                     {user.name} ({user.username})

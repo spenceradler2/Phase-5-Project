@@ -1,5 +1,7 @@
 import { Box, Container, Typography, Grow, Slide } from '@mui/material'
 import { styled } from '@mui/system'
+import { Link } from 'react-router-dom'
+
 
 const StyledContainer = styled(Container)(({
   background: 'linear-gradient(to bottom right, #4A90E2, #50E3C2)', 
@@ -11,9 +13,9 @@ const StyledContainer = styled(Container)(({
   padding: '20px', 
   borderRadius: '15px', 
   boxSizing: 'border-box', 
-  paddingTop: '10px',
+  paddingTop: '30px',
   marginBottom: '5px',
-  margin: 0, 
+  margin: 5, 
   width: '100vw', 
   position: 'relative', 
   top: 6,
@@ -28,6 +30,12 @@ const FeatureCard = styled(Box)(({
   marginBottom: '15px',
   maxWidth: '500px', 
   width: '95%',
+  textDecoration: 'none', 
+  color: 'inherit',  
+  '&:hover': {
+      textDecoration: 'none', 
+      color: 'inherit',       
+    }
 }))
 
 const Home = () => {
@@ -42,9 +50,10 @@ const Home = () => {
               variant="h2"
               color="primary"
               sx={{
+                paddingTop: { xs: '-10px' },
                 textShadow: '.5px .5px 5px black, -.5px -.5px 0px black, .5px -.5px 0px black, -.5px .5px 0px black',
                 paddingLeft: { xs: '0', sm: '90px' },
-                fontSize: { xs: '1.7rem', sm: '2.3rem', md: '3rem' },
+                fontSize: { xs: '1.6rem', sm: '2.3rem', md: '3rem' },
               }}
               gutterBottom
             >
@@ -54,7 +63,7 @@ const Home = () => {
 
           {/* Slide animation for "About" */}
           <Slide direction="right" in={true} mountOnEnter unmountOnExit timeout={1400}>
-            <Box sx={{ marginY: 3 }}>
+            <Box sx={{ marginY: 2 }}>
               {/* About title */}
               <Typography
                 variant="h6"
@@ -111,40 +120,59 @@ const Home = () => {
 
           {/* Feature cards animation */}
           <Box sx={{ marginY: 2, display: 'flex', flexDirection: 'column', alignItems: 'center', width: '100%', paddingLeft: { xs: '0', sm: '50px' } }}> 
-            {/* First Feature Card */}
-            <Slide direction="right" in={true} mountOnEnter unmountOnExit timeout={1600}>
-              <FeatureCard sx={{ marginX: { xs: '10px', sm: '15px' } }}>
+            <Slide direction="right" in={true} mountOnEnter unmountOnExit timeout={1500}>
+              <FeatureCard 
+                component={Link}  to="/create_traveler"
+                sx={{ marginX: { xs: '10px', sm: '15px' } }}>
                 <Typography
                   variant="h6"
                   color="textPrimary"
-                  sx={{ fontSize: { xs: '.9rem', sm: '1.1rem' } }}
+                  sx={{ fontSize: { xs: '.7rem', sm: '1.1rem' } }}
                 >
-                  See a list of all the travel plans, who is going there, and where they are going.
+                  Create a traveler.
+                </Typography>        
+              </FeatureCard>
+            </Slide>
+
+            <Slide direction="right" in={true} mountOnEnter unmountOnExit timeout={1600}>
+              <FeatureCard 
+                component={Link}  to="/travel_plans/new"
+                sx={{ marginX: { xs: '10px', sm: '15px' } }}>
+                <Typography
+                  variant="h6"
+                  color="textPrimary"
+                  sx={{ fontSize: { xs: '.7rem', sm: '1.1rem' } }}
+                >
+                  Add a new travel plan.   
+                  {/* Delete, update, and add a new travel plan.    */}
                   </Typography>        
               </FeatureCard>
             </Slide>
 
-            {/* Second Feature Card */}
             <Slide direction="right" in={true} mountOnEnter unmountOnExit timeout={1800}>
-              <FeatureCard sx={{ marginX: { xs: '10px', sm: '15px' } }}>
+              <FeatureCard 
+              component={Link}  to="/travel_plans"
+              sx={{ marginX: { xs: '10px', sm: '15px' } }}>
                 <Typography
                   variant="h6"
                   color="textPrimary"
-                  sx={{ fontSize: { xs: '.9rem', sm: '1.1rem' } }}
+                  sx={{ fontSize: { xs: '.7rem', sm: '1.1rem' } }}
                 >
-                  Delete, update, and add a new travel plan.   
+                  See a list of all the travel plans, who is going there, and where they are going. Here you can delete and update travel plans you are associated with. 
+                  {/* See a list of all the travel plans, who is going there, and where they are going. */}
                 </Typography>
                 
               </FeatureCard>
             </Slide>
 
-            {/* Third Feature Card */}
             <Slide direction="right" in={true} mountOnEnter unmountOnExit timeout={2000}>
-              <FeatureCard sx={{ marginX: { xs: '10px', sm: '15px' } }}>
+              <FeatureCard 
+              component={Link}  to="/users_travel_plans"
+              sx={{ marginX: { xs: '10px', sm: '15px' } }}>
                 <Typography
                   variant="h6"
                   color="textPrimary"
-                  sx={{ fontSize: { xs: '.9rem', sm: '1.1rem' } }}
+                  sx={{ fontSize: { xs: '.7rem', sm: '1.1rem' } }}
                 >
                   See all the travel plans that one of your friends has.
                 </Typography>
@@ -152,13 +180,14 @@ const Home = () => {
               </FeatureCard>
             </Slide>
 
-            {/* Fourth Feature Card */}
             <Slide direction="right" in={true} mountOnEnter unmountOnExit timeout={2200}>
-              <FeatureCard sx={{ marginX: { xs: '10px', sm: '15px' } }}>
+              <FeatureCard 
+                component={Link}  to="/locations_travel_plans"
+                sx={{ marginX: { xs: '10px', sm: '15px' } }}>
                 <Typography
                   variant="h6"
                   color="textPrimary"
-                  sx={{ fontSize: { xs: '.9rem', sm: '1.1rem' } }}
+                  sx={{ fontSize: { xs: '.7rem', sm: '1.1rem' } }}
                 >
                   See all the travel plans for a specific location.
                 </Typography>

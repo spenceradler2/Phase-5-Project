@@ -45,7 +45,9 @@ const TravelPlanCard = ({ travelPlan, deleteTravelPlan }) => {
         </Typography>
         <Box sx={{ mt: 2 }}>
           {/* Displays the travelers or traveler for that travel plan */}
-          <Typography variant="body1" color="textSecondary"><strong>Traveler(s):</strong></Typography>
+          <Typography variant="body1" color="textSecondary">
+          <strong>{travelPlan.users?.length === 1 ? 'Traveler' : 'Travelers'}:</strong>
+          </Typography>
           {travelPlan.users?.map((user, index) => (
               <Typography key={index} variant="body2" color="textSecondary">
                   {user.name} ({user.username})

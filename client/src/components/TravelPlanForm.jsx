@@ -15,9 +15,10 @@ const StyledBox = styled(Box)({
   flexDirection: 'column',
   justifyContent: 'center',
   alignItems: 'center',
-  padding: '20px',
+  padding: '10px',
   boxSizing: 'border-box',
   borderRadius: '15px', 
+  margin: 2,
 })
 
 //Styling for the card that holds the form elements. 
@@ -30,7 +31,7 @@ const FeatureCard = styled(Box)({
   width: '100%',
   marginBottom: '15px',
   '&:hover': {
-    transform: 'scale(1.02)',
+    transform: 'scale(1.01)',
     transition: 'transform 0.3s ease-in-out',
   },
 })

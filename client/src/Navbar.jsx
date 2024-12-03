@@ -103,11 +103,11 @@ const Navbar = () => {
           <MenuItem component={Link} to="/login" onClick={handleClose} style={styles.menuItemWithDivider}>
             {loggedIn ? 'LOGOUT' : 'LOGIN'}
           </MenuItem>
-          <MenuItem component={Link} to="/travel_plans" onClick={handleClose} style={styles.menuItemWithDivider}>
-            SHOW ALL TRAVEL PLANS
-          </MenuItem>
           <MenuItem component={Link} to="/travel_plans/new" onClick={handleClose} style={styles.menuItemWithDivider}>
             ADD A TRAVEL PLAN
+          </MenuItem>
+          <MenuItem component={Link} to="/travel_plans" onClick={handleClose} style={styles.menuItemWithDivider}>
+            SHOW ALL TRAVEL PLANS
           </MenuItem>
           <MenuItem component={Link} to="/users_travel_plans" onClick={handleClose} style={styles.menuItemWithDivider}>
             SHOW THE TRAVEL PLANS OF A TRAVELER
