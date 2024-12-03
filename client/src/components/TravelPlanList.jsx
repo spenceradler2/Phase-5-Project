@@ -13,6 +13,7 @@ const TravelPlanList = () => {
   // If the fetch failed. 
   const error = useSelector((state) => state.travelPlans.error)
   // State for which type of travel plans are being looked at. All, current, previous or upcoming.  
+
   const [view, setView] = useState('all') 
   // Fetch for getting all the travel plans with redux. 
   useEffect(() => {

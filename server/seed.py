@@ -21,16 +21,16 @@ if __name__ == "__main__":
 
 
     print('Creating users...')
-    user_1 = User(name="Spencer Adler", username="spenceradler2", password = "test")
-    user_2 = User(name="Jennifer Scharf", username="jennsam95", password = "testtest")
-    user_3 = User(name="Regan Cruz", username="rcruz", password = "test3")
-    user_4 = User(name="Dylan Levine", username="dljeter", password = "test4")
-    user_5 = User(name="Mike Perlman", username="mp824", password = "test5")
-    user_6 = User(name="Aliza Bran", username="aliza", password = "aliza1")
-    user_7 = User(name="Eric", username="eric", password = "eric1")
-    user_8 = User(name="Kalyn Holder", username="kayln", password = "kalyn1")
-    user_9 = User(name="Leah Clegg", username="leah", password = "leah1")
-
+    user_1 = User(name="Spencer Adler", username="spenceradler2", password_hash = "test")
+    user_2 = User(name="Jennifer Scharf", username="jennsam95", password_hash = "testtest")
+    user_3 = User(name="Regan Cruz", username="rcruz", password_hash = "test3")
+    user_4 = User(name="Dylan Levine", username="dljeter", password_hash = "test4")
+    user_5 = User(name="Mike Perlman", username="mp824", password_hash = "test5")
+    user_6 = User(name="Aliza Bran", username="aliza", password_hash = "aliza1")
+    user_7 = User(name="Eric", username="eric", password_hash = "eric1")
+    user_8 = User(name="Kalyn Holder", username="kayln", password_hash = "kalyn1")
+    user_9 = User(name="Leah Clegg", username="leah", password_hash = "leah1")
+    
     users = [user_1, user_2, user_3, user_4, user_5,user_6,user_7,user_8,user_9 ]
     db.session.add_all(users)
     db.session.commit()

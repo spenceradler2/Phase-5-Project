@@ -8,6 +8,7 @@ import EditTravelPlanForm from "./components/EditTravelPlanForm"
 import UsersTravelPlanList from "./components/UsersTravelPlanList"
 import LocationsTravelPlanList from "./components/LocationsTravelPlanList"
 import CreateUserPage from "./components/CreateUserPage"
+import Login from "./components/Login"
 
 function App() {
 
@@ -23,6 +24,7 @@ function App() {
           <Route path="/users_travel_plans" element={<UsersTravelPlanList />} />
           <Route path="/locations_travel_plans" element={<LocationsTravelPlanList />} />
           <Route path="/create_traveler" element={<CreateUserPage />} />
+          <Route path="/login" element={<Login/>} />
         </Routes>
         </div>
     </Router>

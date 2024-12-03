@@ -1,4 +1,4 @@
-from flask import request
+from flask import request, session
 from config import db, api, app 
 
 from flask_restful import Resource
@@ -15,16 +15,17 @@ class UsersResource(Resource):
       data = request.get_json()
       name = data.get("name")
       username = data.get("username")
-      # To be uncommented when authentication is added.
-      # password = data.get("password")
+      password = data.get("password")
       try:
         user = User(name=name,
                   username=username,
-                  # To be uncommented when authentication is added.
                   # password=password
-                  ) 
+                  )
+        user.password_hash = password
         db.session.add(user)
         db.session.commit()
+        session["user_id"] = user.id
+
         return user.to_dict(), 201
       except IntegrityError as e:
         return {"error": e.orig.args[0]}, 422
@@ -38,3 +39,39 @@ class UserResource(Resource):
     return user.to_dict(), 200
   
 api.add_resource(UserResource, "/api/user/<int:id>", endpoint="user")
+
+class Login(Resource):
+  def post(self):
+    # Check if user exists.
+    data = request.get_json()
+    username = data.get("username")
+    password = data.get("password")
+    user = User.query.filter_by(username=username).first()
+    if user and user.authenticate(password):
+      session["user_id"] = user.id
+      return user.to_dict(), 200
+    else:
+      return {"error": "Username or password didn't match"}, 422
+
+api.add_resource(Login, "/api/login")
+
+class CheckSession(Resource):
+  def get(self):
+    user_id = session.get("user_id")
+    if user_id:
+      user = User.query.get(user_id)
+      return user.to_dict(), 200
+    else:
+      return {"message": "user not signed in"}, 401
+
+api.add_resource(CheckSession, "/api/check-session")
+
+class Logout(Resource):
+  def delete(self):
+    if session.get("user_id"):
+      del session["user_id"]
+      return {}, 204
+    else:
+      return {"error": "User is not signed in"}, 401
+
+api.add_resource(Logout, "/api/logout")

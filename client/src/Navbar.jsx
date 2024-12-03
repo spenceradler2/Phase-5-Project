@@ -1,6 +1,8 @@
 import React, { useState } from 'react'
 import { AppBar, Toolbar, Typography, IconButton, Menu, MenuItem } from '@mui/material'
 import { Link } from 'react-router-dom'
+import { useSelector } from "react-redux";
+
 import MenuIcon from '@mui/icons-material/Menu'
 
 const styles = {
@@ -48,7 +50,11 @@ const styles = {
   },
 }
 
+
+
 const Navbar = () => {
+  const loggedIn = useSelector((state) => state.user.loggedIn);
+
   // State to control the open/close state of the menu.
   const [anchorEl, setAnchorEl] = useState(null)
   const open = Boolean(anchorEl)
@@ -94,6 +100,9 @@ const Navbar = () => {
           <MenuItem component={Link} to="/create_traveler" onClick={handleClose} style={styles.menuItemWithDivider}>
             CREATE TRAVELER
           </MenuItem>
+          <MenuItem component={Link} to="/login" onClick={handleClose} style={styles.menuItemWithDivider}>
+            {loggedIn ? 'LOGOUT' : 'LOGIN'}
+          </MenuItem>
           <MenuItem component={Link} to="/travel_plans" onClick={handleClose} style={styles.menuItemWithDivider}>
             SHOW ALL TRAVEL PLANS
           </MenuItem>
@@ -106,6 +115,7 @@ const Navbar = () => {
           <MenuItem component={Link} to="/locations_travel_plans" onClick={handleClose} style={styles.menuItem}>
             SHOW THE TRAVEL PLANS FOR A LOCATION
           </MenuItem>
+
         </Menu>
       </Toolbar>
     </AppBar>

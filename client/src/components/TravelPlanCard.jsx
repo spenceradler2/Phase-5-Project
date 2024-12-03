@@ -1,8 +1,15 @@
 import React from 'react'
+import { useSelector } from 'react-redux'
 import { Card, CardContent, CardActions, Button, Typography, Box } from '@mui/material'
 import { Link } from 'react-router-dom'
 
 const TravelPlanCard = ({ travelPlan, deleteTravelPlan }) => {
+  
+  //Get the logged-in user
+  const currentUser = useSelector((state) => state.user.user)
+  // Check if the current user is a user on the travel plan
+  const isUserOwner = currentUser && travelPlan.users?.some(user => user.id === currentUser.id)
+
   return (
     <Card sx={{ maxWidth: 2000, marginBottom: 3, borderRadius: 2, boxShadow: 4 }}>
       <CardContent>
@@ -47,8 +54,17 @@ const TravelPlanCard = ({ travelPlan, deleteTravelPlan }) => {
         </Box>
       </CardContent>
       <CardActions>
-        <Button size="small" color="error" onClick={deleteTravelPlan}>Delete Travel Plan</Button>
-        <Button size="small" component={Link} to={`/travel_plans/${travelPlan.id}/edit`}>Update Travel Plan</Button>
+        {/* Conditionally rendering delete and update button if the user is a user on that travel plan */}
+      {isUserOwner && (
+          <>
+            <Button size="small" color="error" onClick={deleteTravelPlan}>
+              Delete Travel Plan
+            </Button>
+            <Button size="small" component={Link} to={`/travel_plans/${travelPlan.id}/edit`}>
+              Update Travel Plan
+            </Button>
+          </>
+        )}
       </CardActions>
     </Card>
   )

@@ -10,15 +10,13 @@ const CreateUserPage = () => {
   const initialValues = {
     name: "",
     username: "",
-    //  Commented out for now to be able to be added later easily when authentication is implemented 
-    // password: "",  // Uncomment if you plan to include password field
+    password: "",  
   }
 
   const validationSchema = yup.object({
     name: yup.string().required('Name is required.'),
     username: yup.string().required('Username is required.'),
-    //  Commented out for now to be able to be added later easily when authentication is implemented 
-    // password: yup.string().required('Password is required.') // Uncomment if you plan to include password
+    password: yup.string().required('Password is required.') 
   })
 
   // Sends a post request for a new user that was just created with validations. 
@@ -36,7 +34,7 @@ const CreateUserPage = () => {
         alert("User needs to be unique!")
       } else {
         alert("User was created!")
-        navigate('/');
+        navigate('/login');
       }
     })
     .catch((err) => {
@@ -90,11 +88,10 @@ const CreateUserPage = () => {
             />
           </Box>
 
-          {/* Commented out for now to be able to be added later easily when authentication is implemented */}
-          {/* <Box sx={{ mb: 3 }}>
+          <Box sx={{ mb: 3 }}>
             <TextField
               fullWidth
-              label="Provide Password"
+              label="Password"
               variant="outlined"
               name="password"
               id="password"
@@ -103,7 +100,7 @@ const CreateUserPage = () => {
               error={Boolean(formik.errors.password && formik.touched.password)}
               helperText={formik.touched.password && formik.errors.password}
             />
-          </Box> */}
+          </Box>
 
           <Box sx={{ mb: 3 }}>
             <Button type="submit" variant="contained" color="primary" fullWidth>
