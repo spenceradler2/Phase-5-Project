@@ -11,7 +11,7 @@ const StyledContainer = styled(Container)(({
   padding: '20px', 
   borderRadius: '15px', 
   boxSizing: 'border-box', 
-  paddingTop: '65px',
+  paddingTop: '10px',
   marginBottom: '5px',
   margin: 0, 
   width: '100vw', 
@@ -34,7 +34,7 @@ const Home = () => {
   return (
     <Box sx={{ height: '90vh', overflow: 'hidden', display: 'flex', justifyContent: 'center' }}>
       <StyledContainer maxWidth="lg">
-        <Box sx={{ textAlign: 'center', marginTop: { xs: '20px', sm: '8px' }, width: '100%' }}>
+        <Box sx={{ textAlign: 'center', marginTop: { xs: '0px', sm: '8px' }, width: '100%' }}>
           {/* Grow animation for "Welcome" text */}
           <Grow in={true} style={{ transformOrigin: '0 0 0' }} timeout={1000}>
           {/* "Welcome" text */}
@@ -54,7 +54,7 @@ const Home = () => {
 
           {/* Slide animation for "About" */}
           <Slide direction="right" in={true} mountOnEnter unmountOnExit timeout={1400}>
-            <Box sx={{ marginY: 1 }}>
+            <Box sx={{ marginY: 3 }}>
               {/* About title */}
               <Typography
                 variant="h6"
