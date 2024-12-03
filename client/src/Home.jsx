@@ -5,6 +5,8 @@ import { Link } from 'react-router-dom'
 
 const StyledContainer = styled(Container)(({
   background: 'linear-gradient(to bottom right, #4A90E2, #50E3C2)', 
+  // background: 'url("https://images.pexels.com/photos/346885/pexels-photo-346885.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500") no-repeat center center',
+  // backgroundSize: 'cover',
   minHeight: '50%', 
   display: 'flex',
   flexDirection: 'column',
@@ -28,7 +30,7 @@ const FeatureCard = styled(Box)(({
   borderRadius: '8px',
   boxShadow: '0 4px 10px rgba(0, 0, 0, 0.1)',
   marginBottom: '15px',
-  maxWidth: '500px', 
+  maxWidth: '400px', 
   width: '95%',
   textDecoration: 'none', 
   color: 'inherit',  
@@ -127,7 +129,7 @@ const Home = () => {
                 <Typography
                   variant="h6"
                   color="textPrimary"
-                  sx={{ fontSize: { xs: '.7rem', sm: '1.1rem' } }}
+                  sx={{ fontSize: { xs: '.7rem', sm: '.9rem' } }}
                 >
                   Create a traveler.
                 </Typography>        
@@ -141,7 +143,7 @@ const Home = () => {
                 <Typography
                   variant="h6"
                   color="textPrimary"
-                  sx={{ fontSize: { xs: '.7rem', sm: '1.1rem' } }}
+                  sx={{ fontSize: { xs: '.7rem', sm: '.9rem' } }}
                 >
                   Add a new travel plan.   
                   {/* Delete, update, and add a new travel plan.    */}
@@ -156,7 +158,7 @@ const Home = () => {
                 <Typography
                   variant="h6"
                   color="textPrimary"
-                  sx={{ fontSize: { xs: '.7rem', sm: '1.1rem' } }}
+                  sx={{ fontSize: { xs: '.7rem', sm: '.9rem' } }}
                 >
                   See a list of all the travel plans, who is going there, and where they are going. Here you can delete and update travel plans you are associated with. 
                   {/* See a list of all the travel plans, who is going there, and where they are going. */}
@@ -172,7 +174,7 @@ const Home = () => {
                 <Typography
                   variant="h6"
                   color="textPrimary"
-                  sx={{ fontSize: { xs: '.7rem', sm: '1.1rem' } }}
+                  sx={{ fontSize: { xs: '.7rem', sm: '.9rem' } }}
                 >
                   See all the travel plans that one of your friends has.
                 </Typography>
@@ -187,7 +189,7 @@ const Home = () => {
                 <Typography
                   variant="h6"
                   color="textPrimary"
-                  sx={{ fontSize: { xs: '.7rem', sm: '1.1rem' } }}
+                  sx={{ fontSize: { xs: '.7rem', sm: '.9rem' } }}
                 >
                   See all the travel plans for a specific location.
                 </Typography>
