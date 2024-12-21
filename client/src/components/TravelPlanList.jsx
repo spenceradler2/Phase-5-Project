@@ -51,8 +51,9 @@ const TravelPlanList = () => {
     //If the button of upcoming travel plans is clicked filter to show all the travel plans that are after the current date. 
 
     return sortedTravelPlans.filter(travelPlan => {
+      const startDate = parseDate(travelPlan.start_date)
       const endDate = parseDate(travelPlan.end_date)
-      return view === 'upcoming' ? endDate >= now : endDate < now
+      return view === 'upcoming' ? startDate > now : endDate < now
     })
   }
   //If the fetch is in process show a loading icon.
