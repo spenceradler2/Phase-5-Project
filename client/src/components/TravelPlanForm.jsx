@@ -1,11 +1,12 @@
 import React, { useState, useEffect } from 'react'
 import { Formik, FieldArray, Form, Field, ErrorMessage } from 'formik'
 import * as yup from 'yup'
-import { useDispatch } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
 import { addTravelPlan } from '../redux/travelPlans/travelPlansSlice'
 import { useNavigate } from 'react-router-dom'
 import { Box, Button, TextField, Typography, FormControl, InputLabel, Select, MenuItem, FormHelperText } from '@mui/material'
 import { styled } from '@mui/system'
+
 
 //Styling for the background.
 const StyledBox = styled(Box)({
@@ -48,7 +49,12 @@ const InstructionStep = styled(Box)({
   justifyContent: 'center',
 })
 
+
 const TravelPlanForm = () => {
+  const loggedInUser = useSelector((state) => state.user.loggedInUser)
+  const loggedIn = useSelector((state) => state.user.loggedIn)
+
+
   const dispatch = useDispatch()
   const navigate = useNavigate()
 
@@ -61,7 +67,7 @@ const TravelPlanForm = () => {
     start_date: "",
     end_date: "",
     location_name: "",
-    array_of_users_usernames: [],
+    array_of_users_usernames: loggedIn ? [loggedInUser.username] : [],
   }
 
   // Creating validations for the form data. 
@@ -69,7 +75,18 @@ const TravelPlanForm = () => {
     name: yup.string().required("Name is required."),
     iframe_src_or_link: yup.string().required("Provide a link to the map."),
     start_date: yup.date().required("Start date is required."),
-    end_date: yup.date().required("End date is required."),
+    end_date: yup.date().required('End date is required')
+    .test(
+      'end-date-after-start-date',
+      'End date must be after the start date',
+      function(value) {
+        const { start_date } = this.parent;
+        if (start_date && value && new Date(value) < new Date(start_date)) {
+          return false;
+        }
+        return true;
+      }
+    ),
     location_name: yup.string().required("Add a location for this trip."),
     array_of_users_usernames: yup.array().of(
       yup.string().required("Traveler is required.")
@@ -208,7 +225,17 @@ const TravelPlanForm = () => {
                               as={Select}
                               label="Select a user"
                               name={`array_of_users_usernames[${index}]`}
-                              onChange={(e) => setFieldValue(`array_of_users_usernames[${index}]`, e.target.value)}
+                              onChange={(e) => {
+                                const selectedUser = e.target.value;
+                                // Check if the selected user is already in the array and show an error if so
+                                if (values.array_of_users_usernames.includes(selectedUser)) {
+                                  // Set the error message if the user is already selected
+                                  setFieldValue(`array_of_users_usernames[${index}]`, "");
+                                  alert("This user has already been selected");
+                                } else {
+                                  setFieldValue(`array_of_users_usernames[${index}]`, selectedUser);
+                                }
+                              }}
                               value={values.array_of_users_usernames[index]}
                             >
                               <MenuItem value="" disabled>Select user</MenuItem>
@@ -247,6 +274,10 @@ const TravelPlanForm = () => {
                       >
                         Add Traveler
                       </Button>
+                      {/* Display the error for minimum traveler count only if array is not empty */}
+                      { values.array_of_users_usernames.length < 1 && touched.array_of_users_usernames && (
+                      <FormHelperText error>{errors.array_of_users_usernames}</FormHelperText>
+                      )}
                     </Box>
                   )}
                 />

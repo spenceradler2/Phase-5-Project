@@ -1,21 +1,19 @@
-import { useDispatch, useSelector } from "react-redux";
-import { setUser, logoutUser } from '../redux/users/userSlice';
-import { useFormik } from "formik";
-import * as Yup from "yup";
-import { Box, Typography, TextField, Button } from "@mui/material";
+import { useDispatch, useSelector } from "react-redux"
+import { setLoggedInUser, logoutUser } from '../redux/users/userSlice'
+import { useFormik } from "formik"
+import * as Yup from "yup"
+import { Box, Typography, TextField, Button } from "@mui/material"
 
 function Login() {
-  const dispatch = useDispatch();
-  const user = useSelector((state) => state.user.user);
-  const loggedIn = useSelector((state) => state.user.loggedIn);
+  const dispatch = useDispatch()
+  const user = useSelector((state) => state.user.loggedInUser)
+  const loggedIn = useSelector((state) => state.user.loggedIn)
 
-  // Form validation schema using Yup
   const validationSchema = Yup.object({
     username: Yup.string().required("Username is required"),
     password: Yup.string().required("Password is required"),
-  });
+  })
 
-  // Formik hook for form management
   const formik = useFormik({
     initialValues: {
       username: "",
@@ -23,41 +21,42 @@ function Login() {
     },
     validationSchema,
     onSubmit: async (values) => {
-      try {
-        // Send login request to the backend
-        const resp = await fetch("/api/login", {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify(values), // Pass form values
-        });
-
-        if (resp.status === 200) {
-          const userData = await resp.json();
-          dispatch(setUser(userData)); // Update Redux store with user data
-        } else if (resp.status === 422) {
-          // If login fails, check the error message
-          const errorData = await resp.json();
-          if (errorData.error === "Username or password didn't match") {
-            alert("The username or password is incorrect. Please try again.");
-          } else {
-            alert("Oops, something went wrong.");
-          }
+      // Send login request to the backend.
+      const resp = await fetch("/api/login", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(values),
+      })
+  
+      if (resp.status === 200) {
+        const userData = await resp.json()
+        // Update Redux store with user data
+        dispatch(setLoggedInUser(userData))
+      } else if (resp.status === 422) {
+        // If login fails, check the error message
+        const errorData = await resp.json()
+        if (errorData.error === "Username or password didn't match") {
+          alert("The username or password is incorrect. Please try again.")
         } else {
-          alert("Oops, something went wrong.");
+          alert("Oops, something went wrong.")
         }
-      } catch (error) {
-        console.log("An error occurred while logging in:", error);
-        alert("An error occurred. Please try again later.");
       }
     },
-  });
+  })
 
-  // Logout function
-  const handleLogout = () => {
-    dispatch(logoutUser());
-  };
+  const handleLogout = async () => {
+      // Send DELETE request to logout the session as well as updating state
+      const resp = await fetch("/api/logout", {
+        method: "DELETE",
+        headers: {
+          "Content-Type": "application/json",
+        },
+      })
+      dispatch(logoutUser()) // Clear the logged-in user data from Redux
+    }
+
 
   return (
     <div className="loginDiv">
@@ -114,7 +113,7 @@ function Login() {
         </Box>
       )}
     </div>
-  );
+  )
 }
 
-export default Login;
+export default Login

@@ -21,7 +21,7 @@ const LocationsTravelPlanList = () => {
         if (selectedLocation) {
             dispatch(fetchTravelPlansLocationId(selectedLocation))
         }
-    }, [selectedLocation, dispatch]);
+    }, [selectedLocation, dispatch])
     // When a new location is selected updating state for that location. 
     const handleLocationChange = (event) => {
         const locationId = parseInt(event.target.value)

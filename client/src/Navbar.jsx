@@ -1,7 +1,8 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import { AppBar, Toolbar, Typography, IconButton, Menu, MenuItem } from '@mui/material'
 import { Link } from 'react-router-dom'
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux"
+import { setLoggedInUser, logoutUser } from './redux/users/userSlice'
 
 import MenuIcon from '@mui/icons-material/Menu'
 
@@ -30,7 +31,8 @@ const styles = {
   },
   menuButton: {
     marginLeft: 'auto',
-    
+    color: 'darkblue',
+    // boxShadow: '.5px .5px 5px black, -.5px -.5px 0px black, .5px -.5px 0px black, -.5px .5px 0px black',     
   },
   menu: {
     maxHeight: 400,
@@ -53,8 +55,8 @@ const styles = {
 
 
 const Navbar = () => {
-  const loggedIn = useSelector((state) => state.user.loggedIn);
-
+  const loggedIn = useSelector((state) => state.user.loggedIn)
+  const dispatch = useDispatch()
   // State to control the open/close state of the menu.
   const [anchorEl, setAnchorEl] = useState(null)
   const open = Boolean(anchorEl)
@@ -66,10 +68,29 @@ const Navbar = () => {
   const handleClose = () => {
     setAnchorEl(null)
   }
-
-  // const handleClick = () => {
-  //   setAnchorEl(null)
-  // }
+  // Check the current session on load and update state accordingly
+  useEffect(() => {
+    const checkSession = async () => {
+      
+        const response = await fetch('/api/check-session', {
+          headers: {
+            'Content-Type': 'application/json',
+          },
+        })
+  
+        // Check for successful response
+        if (response.status === 200) {
+          const userData = await response.json()
+          dispatch(setLoggedInUser(userData)) // Set the user in Redux state if the session is logged in
+        } 
+        // Check if the status is 401 and advise that the user is not signed in. 
+        else if (response.status === 401) {
+          dispatch(logoutUser()) 
+          console.log('User is not signed in.') // Log message when user is not signed in
+        } 
+    }
+    checkSession()
+  }, [dispatch])
 
   return (
     <AppBar style={styles.appBar}>

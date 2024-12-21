@@ -34,12 +34,12 @@ const CreateUserPage = () => {
         alert("User needs to be unique!")
       } else {
         alert("User was created!")
-        navigate('/login');
+        navigate('/login')
       }
     })
     .catch((err) => {
-      console.error("Error creating user:", err);
-      alert("An error occurred. Please try again.");
+      console.error("Error creating user:", err)
+      alert("An error occurred. Please try again.")
     })
   }
 
@@ -48,7 +48,7 @@ const CreateUserPage = () => {
     validationSchema,
     validateOnChange: false,
     onSubmit: async (values) => {
-      await createUser(values);
+      await createUser(values)
     },
   })
 

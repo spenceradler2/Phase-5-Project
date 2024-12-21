@@ -6,7 +6,7 @@ import { Link } from 'react-router-dom'
 const TravelPlanCard = ({ travelPlan, deleteTravelPlan }) => {
   
   //Get the logged-in user
-  const currentUser = useSelector((state) => state.user.user)
+  const currentUser = useSelector((state) => state.user.loggedInUser)
   // Check if the current user is a user on the travel plan
   const isUserOwner = currentUser && travelPlan.users?.some(user => user.id === currentUser.id)
 

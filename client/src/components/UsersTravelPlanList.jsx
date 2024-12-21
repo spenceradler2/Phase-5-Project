@@ -18,20 +18,20 @@ const UsersTravelPlanList = () => {
         fetch("/api/users")
             .then((resp) => resp.json())
             .then(data => setUsers(data))
-    }, []);
+    }, [])
     // Fetching travel plans for a selected user. 
 
     useEffect(() => {
         if (selectedUser) {
             dispatch(fetchTravelPlansUserId(selectedUser))
         }
-    }, [selectedUser, dispatch]);
+    }, [selectedUser, dispatch])
     // When a new user is selected updating state for that user. 
 
     const handleUserChange = (event) => {
         const userId = parseInt(event.target.value)
         setSelectedUser(userId || null)
-    };
+    }
     // Sorting the travel plans for that user so that the latest travel plans appear first. 
 
     const sortedTravelPlans = travelPlansUserId.travel_plans ? [...travelPlansUserId.travel_plans].sort((a, b) => new Date(b.start_date) - new Date(a.start_date))
@@ -48,7 +48,6 @@ const UsersTravelPlanList = () => {
                     <Select
                         value={selectedUser || ''}
                         onChange={handleUserChange}
-                        margin="normal"
                         label="Select a user"
                         inputProps={{ 'aria-label': 'Select a user' }}
                         style = {{width: 300}}
